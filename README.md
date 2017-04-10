@@ -1,4 +1,4 @@
-#Bootstrap OCB
+# Bootstrap OCB
 
 Currently, automating Pivotal Cloud Foundry (PCF) uses OCB (OpsManager, Concourse, BOSH). In the future, there will be [BOSH-Native PCF](http://bosh-native-pcf-docs.pezapp.io/pcfbosh/index.html).
 
@@ -6,7 +6,7 @@ Before running pipelines for OCB, one must bootstrap an environment. At a minimu
 
 Following are steps to go from an IaaS to deployed PCF plus a set of tiles to provide "AppTone". As a final layer of automation, a set of pipelines to maintain PCF and tiles are added.
 
-##Jumpbox
+## Jumpbox
 
 1. Deploy a linux VM
 2. Add support for Docker to this VM
@@ -14,7 +14,7 @@ Following are steps to go from an IaaS to deployed PCF plus a set of tiles to pr
 
 A helper shell, `cfj`, is installed to simplify using the jumpbox for multiple environments.
 
-##Create BOSH Environment
+## Create BOSH Environment
 
 Decide on a name for the PCF instance you are bootstraping (e.g., bootstrap). After logging into you jumpbox VM, `cfj bootstrap`.
 Next, clone these repos:
@@ -35,11 +35,11 @@ There are a couple helper shells, which you can adjust for the location and name
 
 Using your modified helper shells, run `mkboshadmin.sh`. Once you have successfully deployed director, run `mkconcourse.sh`.
 
-##Deploy OpsManager and Elastic Runtime
+## Deploy OpsManager and Elastic Runtime
 
 Now, we get on with installing OpsManager and Elastic Runtime. The pcf-pipelines project is creating day 1 (initial install) and day 2 (ongoing upgrade) pipelines. PCF-Pipelines are available on [PivNet](https://network.pivotal.io/products/pcf-automation). For vSphere, I recommend using a [fork of concourse-vsphere](https://github.com/wjk940/concourse-vsphere), which has modifications to support the portfolio of tiles you will install after OpsManager and Elastic Runtime.
 
-##Deploy Tiles for "AppTone"
+## Deploy Tiles for "AppTone"
 Pipelines for the initial deploy of a set of tiles, which I refer to as AppTone, are available in a [fork of pcf-pipelines](https://github.com/wjk940/pcf-pipelines). The order is somewhat important, as some tiles depend on others. A suggested order is:
 
 1. Isolation Segment
@@ -50,7 +50,7 @@ Pipelines for the initial deploy of a set of tiles, which I refer to as AppTone,
 6. Spring Cloud Services
 7. Concourse for PCF
 
-##Day 2
+## Day 2
 Finally, create a params.yml for each of the upgrade pipelines. There should be upgrades for:
 
 * OpsManager
