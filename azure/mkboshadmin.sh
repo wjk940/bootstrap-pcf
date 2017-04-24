@@ -14,7 +14,7 @@ export BOSH_ENVIRONMENT=boshadmin
 
 # Alias deployed Director
 echo "alias-env"
-${BOSH} -e 10.0.0.5 --ca-cert <(${BOSH} int ./creds.yml --path /director_ssl/ca) alias-env ${BOSH_ENVIRONMENT}
+${BOSH} -e 10.0.0.8 --ca-cert <(${BOSH} int ./creds.yml --path /director_ssl/ca) alias-env ${BOSH_ENVIRONMENT}
 
 # Log in to the Director
 export BOSH_CLIENT=admin
