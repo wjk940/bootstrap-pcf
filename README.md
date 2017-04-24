@@ -24,13 +24,13 @@ Next, clone these repos:
 
 The repos have var file templates. Copy and fill out these templates for your own deployment(s):
 
-* ./bosh-deployment/vsphere/params.yml
-* Note, ./bosh-deployment/{aws,azure,gcp}/params.yml are coming soon from some volunteers
+* ./bosh-deployment/{aws,azure,gcp,vsphere}/params.yml
 * ./bootstrap-pcf/concourse-vars.yml
 
 There are a couple helper shells, which you can adjust for the location and name of your vars files:
 
-* ./bootstrap-pcf/mkboshadmin.sh
+* ./bootstrap-pcf/{aws,azure,gcp,vsphere}/ may contain an init-*.sh to ease creating all the resources needed before bootstrapping
+* ./bootstrap-pcf/{aws,azure,gcp,vsphere}/mkboshadmin.sh
 * ./bootstrap-pcf/mkconcourse.sh
 
 Using your modified helper shells, run `mkboshadmin.sh`. Once you have successfully deployed director, run `mkconcourse.sh`.
