@@ -139,14 +139,17 @@ az network vnet subnet create \
 #az network public-ip create --name $JUMPBOX_PUBLIC_IP_NAME --resource-group $RESOURCE_GROUP_NAME --allocation-method Static
 
 
-az storage account create --name $AZURE_STORAGE_ACCOUNT --resource-group $RESOURCE_GROUP_NAME --sku Premium_LRS
+az storage account create --name $AZURE_STORAGE_ACCOUNT --resource-group $RESOURCE_GROUP_NAME --sku Standard_LRS
 
 # need some sed magic to extract the storage key and set AZURE_STORAGE_KEY from
 # az storage account keys list --account-name $AZURE_STORAGE_ACCOUNT --resource-group $RESOURCE_GROUP_NAME
 # export AZURE_STORAGE_KEY=""
+# az storage account show-connection-string --name $AZURE_STORAGE_ACCOUNT --resource-group $RESOURCE_GROUP_NAME
+# export AZURE_STORAGE_CONNECTION_STRING=""
 # az storage container create --name bosh
 # az storage container create --name stemcell
 # az storage table create --name stemcells
+az storage account show-connection-string --name keenanbootstrapstorage --resource-group KeenanBootstrap-rg
 
 az login --service-principal --password $CLIENT_SECRET --tenant $TENANT_ID --username $SERVICE_PROVIDER_IDENTIFIER
 
