@@ -20,15 +20,18 @@ export TENANT_ID=
 export APP_DISPLAY_NAME=""
 export APP_HOMEPAGE=http://${YOUR_NAME}BOSHAzureCPI
 export APP_IDENTIFIER_URI=http://${YOUR_NAME}BOSHAzureCPI
-export SERVICE_PROVIDER_IDENTIFIER=http://${YOUR_NAME}BOSHAzureCPISP
+export CLIENT_ID=http://${YOUR_NAME}BOSHAzureCID
 export CLIENT_SECRET=
 export RESOURCE_GROUP_NAME=${YOUR_NAME}Bootstrap-rg
 export VNET_NAME=${YOUR_NAME}Bootstrap-vnet
 export SUBNET_NAME=bootstrap
 export JUMPBOX_PUBLIC_IP_NAME=jumpbox-pubip
+export CONCOURSE_PUBLIC_IP_NAME=concourse-pubip
 export BOSH_NSG=bosh-nsg
 export NETWORK_SECURITY_GROUP=${YOUR_NAME}Bootstrap-nsg
 export AZURE_STORAGE_ACCOUNT=$(echo ${YOUR_NAME}storageaccount | tr '[:upper:]' '[:lower:]')
+export ADMIN_USER=
+export SSH_PUBLIC_KEY=
 
 az configure --defaults location=westus
 az account set --subscription $SUBSCRIPTION_ID
@@ -44,7 +47,7 @@ az ad app create \
 	--password $CLIENT_SECRET
 
 #az ad sp create --id $APP_IDENTIFIER_URI
-az ad sp create-for-rbac --name $SERVICE_PROVIDER_IDENTIFIER --password $CLIENT_SECRET --role "Contributor"
+az ad sp create-for-rbac --name $CLIENT_ID --password $CLIENT_SECRET --role "Contributor"
 #az role assignment create --assignee $APP_IDENTIFIER_URI --role "Contributor"
 
 az group create --name $RESOURCE_GROUP_NAME
@@ -136,7 +139,9 @@ az network nsg rule create \
 az network vnet subnet create \
 	--address-prefix 10.0.0.0/24 --name $SUBNET_NAME --resource-group $RESOURCE_GROUP_NAME --vnet-name $VNET_NAME
 
-#az network public-ip create --name $JUMPBOX_PUBLIC_IP_NAME --resource-group $RESOURCE_GROUP_NAME --allocation-method Static
+az network public-ip create --name $JUMPBOX_PUBLIC_IP_NAME --resource-group $RESOURCE_GROUP_NAME --allocation-method Static
+
+az network public-ip create --name $CONCOURSE_PUBLIC_IP_NAME --resource-group $RESOURCE_GROUP_NAME --allocation-method Static
 
 
 az storage account create --name $AZURE_STORAGE_ACCOUNT --resource-group $RESOURCE_GROUP_NAME --sku Standard_LRS
@@ -148,14 +153,14 @@ az storage account create --name $AZURE_STORAGE_ACCOUNT --resource-group $RESOUR
 # az storage container create --name stemcell
 # az storage table create --name stemcells
 
-az login --service-principal --password $CLIENT_SECRET --tenant $TENANT_ID --username $SERVICE_PROVIDER_IDENTIFIER
+az login --service-principal --password $CLIENT_SECRET --tenant $TENANT_ID --username $CLIENT_ID
 
 #
 # create jumpbox VM
 az vm create \
 	--name jumpbox \
 	--resource-group $RESOURCE_GROUP_NAME \
-	--admin-username wjk \
+	--admin-username $ADMIN_USER \
 	--authentication-type ssh \
 	--image UbuntuLTS \
 	--nsg bosh-nsg \
@@ -163,6 +168,6 @@ az vm create \
 	--private-ip-address 10.0.0.4 \
 	--public-ip-address $JUMPBOX_PUBLIC_IP_NAME \
 	--size Standard_DS1_v2 \
-	--ssh-key-value /Users/wjk/Documents/Lab/BOSH-Admin/params/azure.pub \
+	--ssh-key-value $SSH_PUBLIC_KEY \
 	--subnet $SUBNET_NAME \
 	--vnet-name $VNET_NAME
