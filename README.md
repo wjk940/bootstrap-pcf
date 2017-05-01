@@ -12,7 +12,7 @@ Following are steps to go from an IaaS to deployed PCF plus a set of tiles to pr
 2. Add support for Docker to this VM
 3. We use [cfjump](https://github.com/RamXX/cfjump), which is installed by `docker pull ramxx/cfjump:latest`
 
-A helper shell, `cfj`, is installed to simplify using the jumpbox for multiple environments.
+A helper shell, `cfj`, should be installed on your PATH (e.g., ~/bin/cfj). `cfj` simplifies using the jumpbox for multiple environments. (Show raw on github, copy, and paste into vim on your jumpbox is one way to get this helper installed.)
 
 ## Create BOSH Environment
 
@@ -31,7 +31,7 @@ There are a couple helper shells, which you can adjust for the location and name
 
 * ./bootstrap-pcf/{aws,azure,gcp,vsphere}/ may contain an init-*.sh to ease creating all the resources needed before bootstrapping
 * ./bootstrap-pcf/{aws,azure,gcp,vsphere}/mkboshadmin.sh
-* ./bootstrap-pcf/mkconcourse.sh
+* ./bootstrap-pcf/{aws,azure,gcp,vsphere}/mkconcourse.sh
 
 Using your modified helper shells, run `mkboshadmin.sh`. Once you have successfully deployed director, run `mkconcourse.sh`.
 
@@ -48,7 +48,6 @@ Pipelines for the initial deploy of a set of tiles, which I refer to as AppTone,
 4. RabbitMQ
 5. MySQL
 6. Spring Cloud Services
-7. Concourse for PCF
 
 ## Day 2
 Finally, create a params.yml for each of the upgrade pipelines. There should be upgrades for:
