@@ -5,9 +5,9 @@ name: concourse
 
 releases:
 - name: concourse
-  version: 2.7.1
-  url: http://bosh.io/d/github.com/concourse/concourse?v=2.7.1
-  sha1: af9424c8f9d9ea14e961743e4d8d4fa187fc1e31
+  version: 2.7.4
+  url: http://bosh.io/d/github.com/concourse/concourse?v=2.7.4
+  sha1: 59f20ddea3ffd9bcab572abb3e2e1137aa3d6e7a
 - name: garden-runc
   version: 1.1.1
   url: http://bosh.io/d/github.com/cloudfoundry/garden-runc-release?v=1.1.1
@@ -29,6 +29,8 @@ instance_groups:
   azs: [z1]
   networks:
   - name: default
+    default: [dns, gateway]
+  - name: vip
     static_ips: [((concourse_ip))]
   jobs:
   - name: atc
