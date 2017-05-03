@@ -25,15 +25,16 @@ Next, clone these repos:
 The repos have var file templates. Copy and fill out these templates for your own deployment(s):
 
 * ./bosh-deployment/{aws,azure,gcp,vsphere}/params.yml
-* ./bootstrap-pcf/concourse-vars.yml
+* ./bootstrap-pcf/concourse-param.yml
 
 There are a couple helper shells, which you can adjust for the location and name of your vars files:
 
 * ./bootstrap-pcf/{aws,azure,gcp,vsphere}/ may contain an init-*.sh to ease creating all the resources needed before bootstrapping
 * ./bootstrap-pcf/{aws,azure,gcp,vsphere}/mkboshadmin.sh
-* ./bootstrap-pcf/{aws,azure,gcp,vsphere}/mkconcourse.sh
+* ./bootstrap-pcf/{aws,azure,gcp,vsphere}/mkconcourse.sh provide your own certificate/key
+* ./bootstrap-pcf/{aws,azure,gcp,vsphere}/mkconcourseca.sh BOSH created certificate/key
 
-Using your modified helper shells, run `mkboshadmin.sh`. Once you have successfully deployed director, run `mkconcourse.sh`.
+Using your modified helper shells, run `mkboshadmin.sh`. Once you have successfully deployed director, run `mkconcourse.sh` or `mkconcourseca.sh`.
 
 ## Deploy OpsManager and Elastic Runtime
 
