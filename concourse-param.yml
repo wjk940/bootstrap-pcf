@@ -14,7 +14,7 @@
 concourse_fqdn:
 concourse_ip:
 concourse_password:
-concourse_tls_cert:
-concourse_tls_key:
+concourse_tls_cert:     # not needed if using concourseca.yml
+concourse_tls_key:      # not needed if using concourseca.yml
 concourse_user:
 concourse_worker_count:
