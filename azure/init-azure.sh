@@ -29,7 +29,7 @@ export JUMPBOX_PUBLIC_IP_NAME=jumpbox-pubip
 export CONCOURSE_PUBLIC_IP_NAME=concourse-pubip
 export BOSH_NSG=bosh-nsg
 export NETWORK_SECURITY_GROUP=${YOUR_NAME}Bootstrap-nsg
-export AZURE_STORAGE_ACCOUNT=$(echo ${YOUR_NAME}storageaccount | tr '[:upper:]' '[:lower:]')
+export AZURE_STORAGE_ACCOUNT=$(echo ${YOUR_NAME}storacct | tr '[:upper:]' '[:lower:]')
 export ADMIN_USER=
 export SSH_PUBLIC_KEY=
 
@@ -146,12 +146,11 @@ az network public-ip create --name $CONCOURSE_PUBLIC_IP_NAME --resource-group $R
 
 az storage account create --name $AZURE_STORAGE_ACCOUNT --resource-group $RESOURCE_GROUP_NAME --sku Standard_LRS
 
-# need some sed magic to extract the storage key and set AZURE_STORAGE_KEY from:
-# az storage account keys list --account-name $AZURE_STORAGE_ACCOUNT --resource-group $RESOURCE_GROUP_NAME
-# export AZURE_STORAGE_KEY=""
-# az storage container create --name bosh
-# az storage container create --name stemcell
-# az storage table create --name stemcells
+# 
+export AZURE_STORAGE_KEY=$(az storage account keys list --account-name $AZURE_STORAGE_ACCOUNT --resource-group $RESOURCE_GROUP_NAME | jq -r .[0].value)
+az storage container create --name bosh
+az storage container create --name stemcell
+az storage table create --name stemcells
 
 az login --service-principal --password $CLIENT_SECRET --tenant $TENANT_ID --username $CLIENT_ID
 
