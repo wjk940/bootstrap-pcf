@@ -12,4 +12,5 @@ ${BOSH} -n -e boshadmin upload-stemcell \
 	--sha1=dc0ac0443728638e4aa1d4a8d25942989a9853d3
 
 # Get a deployment running
-${BOSH} -n deploy bootstrap-pcf/concourse.yml -l ./concourse-vars.yml
+${BOSH} -n deploy bootstrap-pcf/concourse.yml -o bootstrap-pcf/azure/concourse-web-network.yml \
+	-l [MY FILLED OUT PARAM.YML]
