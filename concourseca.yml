@@ -27,11 +27,6 @@ instance_groups:
   vm_type: large
   stemcell: trusty
   azs: [z1]
-  networks:
-  - name: default
-    default: [dns, gateway]
-  - name: vip
-    static_ips: [((concourse_ip))]
   jobs:
   - name: atc
     release: concourse
