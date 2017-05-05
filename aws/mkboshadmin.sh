@@ -6,7 +6,7 @@ BOSH_DEPLOYMENT=bosh-deployment
 echo "create-env"
 ${BOSH} create-env ${BOSH_DEPLOYMENT}/bosh.yml \
   --state=./state.json \
-  --ops-file=${BOSH_DEPLOYMENT}/vsphere/cpi.yml \
+  --ops-file=${BOSH_DEPLOYMENT}/aws/cpi.yml \
   --vars-store=./bosh-creds.yml \
   --vars-file=[MY FILLED OUT PARAM.YML]
 
@@ -22,5 +22,5 @@ export BOSH_CLIENT_SECRET=`${BOSH} interpolate ./bosh-creds.yml --path /admin_pa
 
 # Update cloud config -- single az
 echo "update-cloud-config"
-${BOSH} -n update-cloud-config ${BOSH_DEPLOYMENT}/vsphere/cloud-config.yml \
+${BOSH} -n update-cloud-config ${BOSH_DEPLOYMENT}/aws/cloud-config.yml \
   --vars-file=[MY FILLED OUT PARAM.YML]

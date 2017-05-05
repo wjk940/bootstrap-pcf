@@ -1,0 +1,25 @@
+- type: replace
+  path: /variables/-
+  value:
+    name: default_ca
+    type: certificate
+    options:
+      is_ca: true
+      common_name: ca # todo fix
+- type: replace
+  path: /variables/-
+  value:
+    name: concourse_tls
+    type: certificate
+    options:
+      ca: default_ca
+      common_name: ((concourse_ip))
+      alternative_names: [((concourse_fqdn))]
+- type: replace
+  path: /instance_groups/name=web/jobs/name=atc/properties/tls_cert
+  value:
+    ((concourse_tls.certificate))
+- type: replace
+  path: /instance_groups/name=web/jobs/name=atc/properties/tls_key
+  value:
+    ((concourse_tls.private_key))

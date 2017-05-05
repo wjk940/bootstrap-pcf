@@ -8,10 +8,12 @@ export BOSH_ENVIRONMENT=boshadmin
 export BOSH_DEPLOYMENT=concourse
 
 ${BOSH} -n -e boshadmin upload-stemcell \
-	https://bosh.io/d/stemcells/bosh-azure-hyperv-ubuntu-trusty-go_agent?v=3363.20 \
-	--sha1=e495b25e2bd4ce4c255846b6f8a3c7b652c42bb7
+  https://bosh.io/d/stemcells/bosh-vsphere-esxi-ubuntu-trusty-go_agent?v=3363.20 \
+  --sha1=cc46c54c4b93dc0933bf9139b60d6782ffcad7ef
 
 # Get a deployment running
 ${BOSH} -n deploy bootstrap-pcf/concourse.yml \
-	--ops-file=bootstrap-pcf/azure/concourse-web-network.yml \
-	--vars-file=[MY FILLED OUT PARAM.YML]
+  --ops-file=bootstrap-pcf/vsphere/concourse-web-network.yml \
+  --ops-file=bootstrap-pcf/concourse-bosh-ca.yml \
+  --vars-store=./concourse-creds.yml \
+  --vars-file=[MY FILLED OUT PARAM.YML]
