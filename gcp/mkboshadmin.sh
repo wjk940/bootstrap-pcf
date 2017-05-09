@@ -10,11 +10,12 @@ ${BOSH} create-env ${BOSH_DEPLOYMENT}/bosh.yml \
   --vars-store=./bosh-creds.yml \
   --vars-file=[MY FILLED OUT PARAM.YML]
 
+export BOSH_FQDN=
 export BOSH_ENVIRONMENT=boshadmin
 
 # Alias deployed Director
 echo "alias-env"
-${BOSH} -e bosh.ops.wjkeenan.net --ca-cert <(${BOSH} interpolate ./bosh-creds.yml --path /director_ssl/ca) alias-env ${BOSH_ENVIRONMENT}
+${BOSH} -e ${BOSH_FQDN} --ca-cert <(${BOSH} interpolate ./bosh-creds.yml --path /director_ssl/ca) alias-env ${BOSH_ENVIRONMENT}
 
 # Log in to the Director
 export BOSH_CLIENT=admin
