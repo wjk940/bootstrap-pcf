@@ -10,7 +10,7 @@ ${BOSH} create-env ${BOSH_DEPLOYMENT}/bosh.yml \
   --vars-store=./bosh-creds.yml \
   --vars-file=[MY FILLED OUT PARAM.YML]
 
-export BOSH_FQDN=
+export BOSH_FQDN=[MY FQDN or IP ADDRESS FOR BOSH]
 export BOSH_ENVIRONMENT=boshadmin
 
 # Alias deployed Director
