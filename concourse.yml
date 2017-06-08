@@ -5,13 +5,13 @@ name: concourse
 
 releases:
 - name: concourse
-  version: 3.0.1
-  url: https://bosh.io/d/github.com/concourse/concourse?v=3.0.1
-  sha1: ade4f7b6a939d3a47590006410aa89f69b4dbd1f
+  version: 3.1.1
+  url: https://bosh.io/d/github.com/concourse/concourse?v=3.1.1
+  sha1: d796ed9059dc6d97aec9dcbf13c2529c53149692
 - name: garden-runc
-  version: 1.6.0
-  url: https://bosh.io/d/github.com/cloudfoundry/garden-runc-release?v=1.6.0
-  sha1: 58fbc64aff303e6d76899441241dd5dacef50cb7
+  version: 1.8.0
+  url: https://bosh.io/d/github.com/cloudfoundry/garden-runc-release?v=1.8.0
+  sha1: 0c112d0bdcb52e61db7251e99b2a116982201c99
 
 # look at getting stemcell using PivNet resource https://github.com/pivotal-cf/pivnet-resource
 stemcells:
