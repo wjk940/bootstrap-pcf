@@ -8,8 +8,8 @@ export BOSH_ENVIRONMENT=boshadmin
 export BOSH_DEPLOYMENT=concourse
 
 ${BOSH} -n -e boshadmin upload-stemcell \
-  https://bosh.io/d/stemcells/bosh-vsphere-esxi-ubuntu-trusty-go_agent?v=3421.4 \
-  --sha1=f503cae5189d7561fb1081c78157759e0e077f7f
+  https://bosh.io/d/stemcells/bosh-vsphere-esxi-ubuntu-trusty-go_agent?v=3421.9 \
+  --sha1=f5de77161ee2cc4014cde055c845f7b1cfc9f005
 
 # Get a deployment running
 ${BOSH} -n deploy bootstrap-pcf/concourse.yml \
